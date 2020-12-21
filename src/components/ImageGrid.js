@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { projectFirestore } from "../firebase/config";
 import useFirestore from "../hooks/useFirestore";
 
@@ -21,9 +21,15 @@ const ImageGrid = ({ setSelectedImg }) => {
     <div className="img-grid">
       {docs &&
         docs.map((doc) => (
-          <div key={doc.id}>
+          <motion.div layout whileHover={{ opacity: 1 }} key={doc.id}>
             <div className="img-wrap" onClick={() => setSelectedImg(doc.url)}>
-              <img src={doc.url} alt="image" />
+              <motion.img
+                src={doc.url}
+                alt="image"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              />
             </div>
             <button
               style={{ zIndex: 100, color: " var(--primary)" }}
@@ -31,7 +37,7 @@ const ImageGrid = ({ setSelectedImg }) => {
             >
               Delete
             </button>
-          </div>
+          </motion.div>
         ))}
     </div>
   );
